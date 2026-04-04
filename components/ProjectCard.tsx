@@ -13,12 +13,16 @@ const STATUS_CONFIG: Record<ProjectStatus, { label: string; class: string }> = {
 interface Props {
   project: Project;
   index?: number;
+  taskCount?: number;
+  doneCount?: number;
 }
 
-export default function ProjectCard({ project, index = 0 }: Props) {
+export default function ProjectCard({ project, index = 0, taskCount, doneCount }: Props) {
   const status = STATUS_CONFIG[project.status];
-  const doneTasks = project.tasks.filter(t => t.status === 'done').length;
-  const totalTasks = project.tasks.length;
+  // Prefer externally-passed counts (from store) over embedded project.tasks
+  const total = taskCount ?? project.tasks.length;
+  const done = doneCount ?? project.tasks.filter(t => t.status === 'done').length;
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
 
   return (
     <Link
@@ -43,7 +47,7 @@ export default function ProjectCard({ project, index = 0 }: Props) {
               </h3>
               {project.dueDate && (
                 <p className="text-white/30 text-xs mt-0.5">
-                  Due {new Date(project.dueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                  Due {new Date(project.dueDate + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                 </p>
               )}
             </div>
@@ -59,15 +63,15 @@ export default function ProjectCard({ project, index = 0 }: Props) {
         </p>
 
         {/* Task progress */}
-        {totalTasks > 0 && (
+        {total > 0 && (
           <div className="flex items-center gap-2">
             <div className="flex-1 h-1 bg-white/10 rounded-full overflow-hidden">
               <div
-                className="h-full rounded-full transition-all"
-                style={{ width: `${(doneTasks / totalTasks) * 100}%`, background: project.color }}
+                className="h-full rounded-full transition-all duration-300"
+                style={{ width: `${pct}%`, background: project.color }}
               />
             </div>
-            <span className="text-white/30 text-xs">{doneTasks}/{totalTasks}</span>
+            <span className="text-white/30 text-xs">{done}/{total}</span>
           </div>
         )}
       </div>

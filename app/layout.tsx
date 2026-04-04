@@ -4,6 +4,7 @@ import './globals.css';
 import Header from '@/components/Header';
 import AuthProvider from '@/components/AuthProvider';
 import SwRegister from '@/components/SwRegister';
+import { AppContextProvider } from '@/lib/app-context';
 
 const raleway = Raleway({
   subsets: ['latin'],
@@ -40,9 +41,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${raleway.variable} ${workSans.variable} h-full`}>
       <body className="min-h-full bg-[#0d0d0d] text-white antialiased">
         <AuthProvider>
-          <SwRegister />
-          <Header />
-          <main>{children}</main>
+          <AppContextProvider>
+            <SwRegister />
+            <Header />
+            <main>{children}</main>
+          </AppContextProvider>
         </AuthProvider>
       </body>
     </html>
