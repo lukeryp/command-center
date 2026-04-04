@@ -1,5 +1,5 @@
-export type IPStatus = 'draft' | 'draft-complete' | 'filed' | 'pending' | 'granted' | 'active' | 'registered';
-export type IPCategory = 'patent' | 'trademark' | 'trade-secret' | 'nda' | 'document';
+export type IPStatus = 'draft' | 'draft-complete' | 'filed' | 'pending' | 'granted' | 'active' | 'registered' | 'concept';
+export type IPCategory = 'patent' | 'trademark' | 'trade-secret' | 'nda' | 'document' | 'idea';
 export type IPPriority = 'high' | 'medium' | 'low';
 
 export interface IPItem {
@@ -15,6 +15,7 @@ export interface IPItem {
   dateModified?: string;
   notes?: string;
   formalTitle?: string;
+  relatedProject?: { name: string; href: string };
 }
 
 const MASTER_DOC = 'https://docs.google.com/document/d/1Z1VzFiuFLEuNfMqW_sw7OxIaBwatS0zkm1uaubHe_Ns/edit';
@@ -33,6 +34,7 @@ export const IP_ITEMS: IPItem[] = [
     docTab: '03_Hammer Schleis',
     dateModified: 'Oct 8, 2025',
     formalTitle: 'Utility Patent Application — Hammer Schleis Training System',
+    relatedProject: { name: 'FORGE Training System', href: '/projects' },
   },
   {
     id: 'rotatable-shaft',
@@ -46,6 +48,7 @@ export const IP_ITEMS: IPItem[] = [
     docTab: '04_ Rotatable Shaft',
     dateModified: 'Oct 8, 2025',
     formalTitle: 'Utility Patent Application (Final Fortified Draft) — Rotatable Shaft',
+    relatedProject: { name: 'Rypstick', href: '/projects' },
   },
   {
     id: 'lag-strip-patent',
@@ -59,6 +62,7 @@ export const IP_ITEMS: IPItem[] = [
     docTab: 'Update Lag strip',
     dateModified: 'Oct 8, 2025',
     formalTitle: 'System and Method for Proportional Difficulty Athletic Training',
+    relatedProject: { name: 'FORGE Training System', href: '/projects' },
   },
   {
     id: 'aim-laser',
@@ -72,6 +76,7 @@ export const IP_ITEMS: IPItem[] = [
     docTab: 'Updated Aim/laser',
     dateModified: 'Oct 8, 2025',
     formalTitle: 'System and Method for Diagnosing Intrinsic Athletic Aiming Bias',
+    relatedProject: { name: 'FORGE Training System', href: '/projects' },
   },
   {
     id: 'ground-force',
@@ -85,6 +90,7 @@ export const IP_ITEMS: IPItem[] = [
     docTab: 'Ground Force and Hip Speed Training',
     dateModified: 'Oct 8, 2025',
     notes: 'Related doc: "Ground force and speed belt patent" (Dec 2024) in Drive Patents/trademarks folder.',
+    relatedProject: { name: 'FORGE Training System', href: '/projects' },
   },
   {
     id: 'big-ball',
@@ -97,6 +103,7 @@ export const IP_ITEMS: IPItem[] = [
     docUrl: MASTER_DOC,
     docTab: 'Big Ball',
     dateModified: 'Oct 8, 2025',
+    relatedProject: { name: 'FORGE Training System', href: '/projects' },
   },
   {
     id: 'hockey-helmet',
@@ -109,6 +116,7 @@ export const IP_ITEMS: IPItem[] = [
     docUrl: MASTER_DOC,
     docTab: 'Hockey Helmet',
     dateModified: 'Oct 8, 2025',
+    relatedProject: { name: 'FORGE Training System', href: '/projects' },
   },
 
   // ── TRADEMARKS ────────────────────────────────────────────────────────────
@@ -127,6 +135,7 @@ export const IP_ITEMS: IPItem[] = [
     status: 'active',
     priority: 'high',
     description: 'Training system brand — covers the proprietary drill framework, assessment methodology, and training equipment line.',
+    relatedProject: { name: 'FORGE', href: '/projects' },
   },
   {
     id: 'tm-known',
@@ -135,6 +144,7 @@ export const IP_ITEMS: IPItem[] = [
     status: 'active',
     priority: 'medium',
     description: 'Member recognition platform — covers the Known.golf digital platform and service model.',
+    relatedProject: { name: 'Known platform', href: '/projects' },
   },
   {
     id: 'tm-rypstick',
@@ -144,6 +154,7 @@ export const IP_ITEMS: IPItem[] = [
     priority: 'medium',
     description: 'Golf training product — speed training device. Has active Shopify store (Swing Speed Golf Lab).',
     notes: 'Rypstick Patent.pdf exists in Google Drive (Sep 2025). Has associated patent application.',
+    relatedProject: { name: 'Rypstick', href: '/projects' },
   },
 
   // ── TRADE SECRETS ─────────────────────────────────────────────────────────
@@ -155,6 +166,7 @@ export const IP_ITEMS: IPItem[] = [
     priority: 'high',
     description: 'Proprietary drill framework, assessment protocols, and training progression system. Core IP for RYP instruction and certification.',
     notes: 'Protected via certification program access controls, instructor NDAs, and platform security.',
+    relatedProject: { name: 'FORGE', href: '/projects' },
   },
   {
     id: 'ts-extraction-prompt',
@@ -177,6 +189,7 @@ export const IP_ITEMS: IPItem[] = [
     docUrl: 'https://docs.google.com/document/d/1L4UaLj4yhEJjktxy0W2FwoyAXQxM3YeZzYqHZNKPE-8/edit',
     dateModified: 'Oct 9, 2025',
     notes: 'Supplier account may be compromised. Verify identity before re-engaging.',
+    relatedProject: { name: 'Sourcing Pipeline', href: '/sourcing' },
   },
 
   // ── REFERENCE DOCUMENTS ───────────────────────────────────────────────────
@@ -242,6 +255,42 @@ export const IP_ITEMS: IPItem[] = [
     priority: 'low',
     description: 'R&D documentation covering product development pipeline and innovation roadmap.',
     dateModified: 'Aug 8, 2025',
+  },
+
+  // ── IDEAS ─────────────────────────────────────────────────────────────────
+  {
+    id: 'idea-preformed-grip',
+    name: 'Preformed Grip',
+    category: 'idea',
+    status: 'concept',
+    priority: 'high',
+    description: 'Proprietary grip molding design — custom preformed grip geometry for improved hand placement and consistency.',
+    notes: 'Related to sourcing relationship with Shenzhen Youquan. Covered under active NDA.',
+    relatedProject: { name: 'Sourcing Pipeline', href: '/sourcing' },
+  },
+  {
+    id: 'idea-speed-belt',
+    name: 'Speed Belt Integration',
+    category: 'idea',
+    status: 'concept',
+    priority: 'medium',
+    description: 'Wearable training belt with embedded force sensors for real-time hip speed measurement and feedback during swing training.',
+  },
+  {
+    id: 'idea-visual-constraint-visor',
+    name: 'Visual Constraint Visor',
+    category: 'idea',
+    status: 'concept',
+    priority: 'medium',
+    description: 'Alternative to hockey helmet for visual constraint training — lighter form factor with targeted field-of-view restriction.',
+  },
+  {
+    id: 'idea-swing-plane-laser',
+    name: 'Swing Plane Laser Array',
+    category: 'idea',
+    status: 'concept',
+    priority: 'low',
+    description: 'Multi-laser system that projects the ideal swing plane in real-time, providing immediate visual feedback for plane training.',
   },
 ];
 

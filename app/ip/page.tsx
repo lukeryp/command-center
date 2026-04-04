@@ -3,10 +3,11 @@ import { useState, useMemo } from 'react';
 import { IP_ITEMS, IPCategory, MASTER_PATENT_DOC_URL } from '@/lib/ip-data';
 import IPCard from '@/components/IPCard';
 
-type FilterValue = 'all' | 'patent' | 'trademark' | 'trade-secret' | 'nda' | 'document';
+type FilterValue = 'all' | 'patent' | 'trademark' | 'trade-secret' | 'nda' | 'document' | 'idea';
 
 const FILTERS: { label: string; value: FilterValue }[] = [
   { label: 'All',           value: 'all' },
+  { label: 'Ideas',         value: 'idea' },
   { label: 'Patents',       value: 'patent' },
   { label: 'Trademarks',    value: 'trademark' },
   { label: 'Trade Secrets', value: 'trade-secret' },
@@ -20,6 +21,7 @@ const CATEGORY_LABELS: Record<IPCategory, { label: string; dot: string }> = {
   'trade-secret': { label: 'Trade Secrets', dot: 'bg-red-400' },
   'nda':          { label: 'NDAs',          dot: 'bg-[#f4ee19]' },
   'document':     { label: 'Documents',     dot: 'bg-white/40' },
+  'idea':         { label: 'Ideas',         dot: 'bg-amber-400' },
 };
 
 export default function IPPage() {
@@ -31,6 +33,7 @@ export default function IPPage() {
   );
 
   const patentCount = IP_ITEMS.filter(i => i.category === 'patent').length;
+  const ideaCount = IP_ITEMS.filter(i => i.category === 'idea').length;
   const draftCompleteCount = IP_ITEMS.filter(i => i.status === 'draft-complete').length;
   const highCount = IP_ITEMS.filter(i => i.priority === 'high').length;
 
@@ -43,8 +46,9 @@ export default function IPPage() {
             <h1 className="text-2xl font-bold text-white" style={{ fontFamily: 'Raleway, sans-serif' }}>
               Intellectual Property
             </h1>
-            <div className="flex gap-3 mt-1">
+            <div className="flex gap-3 mt-1 flex-wrap">
               <span className="text-violet-300 text-sm font-medium">{patentCount} patents</span>
+              <span className="text-amber-400 text-sm">{ideaCount} ideas</span>
               <span className="text-[#00af51] text-sm">{draftCompleteCount} draft complete</span>
               <span className="text-white/40 text-sm">{highCount} high priority</span>
               <span className="text-white/30 text-sm">{IP_ITEMS.length} total</span>
@@ -87,7 +91,7 @@ export default function IPPage() {
       {/* "All" view with sections */}
       {filter === 'all' && (
         <div className="flex flex-col gap-6">
-          {(['patent', 'trademark', 'trade-secret', 'nda', 'document'] as IPCategory[]).map(cat => {
+          {(['idea', 'patent', 'trademark', 'trade-secret', 'nda', 'document'] as IPCategory[]).map(cat => {
             const items = IP_ITEMS.filter(i => i.category === cat);
             if (items.length === 0) return null;
             const config = CATEGORY_LABELS[cat];

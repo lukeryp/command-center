@@ -10,6 +10,7 @@ const STATUS_CONFIG: Record<IPStatus, { label: string; class: string }> = {
   'granted':        { label: 'GRANTED',         class: 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30' },
   'active':         { label: 'ACTIVE',          class: 'bg-[#00af51]/15 text-[#00af51] border-[#00af51]/30' },
   'registered':     { label: 'REGISTERED',      class: 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30' },
+  'concept':        { label: 'CONCEPT',         class: 'bg-amber-500/15 text-amber-400 border-amber-500/30' },
 };
 
 const PRIORITY_CONFIG: Record<IPPriority, { dot: string; label: string }> = {
@@ -24,6 +25,7 @@ const CATEGORY_ICON: Record<IPCategory, string> = {
   'trade-secret': '\u{1F512}',
   'nda':          '\u{1F91D}',
   'document':     '\u{1F4C4}',
+  'idea':         '\u{1F4A1}',
 };
 
 interface Props {
@@ -36,6 +38,7 @@ export default function IPCard({ item, index = 0 }: Props) {
   const status = STATUS_CONFIG[item.status];
   const priority = PRIORITY_CONFIG[item.priority];
   const isPatent = item.category === 'patent';
+  const isIdea = item.category === 'idea';
 
   return (
     <div
@@ -44,12 +47,16 @@ export default function IPCard({ item, index = 0 }: Props) {
     >
       <div
         className={`relative bg-white/5 border rounded-2xl overflow-hidden backdrop-blur-sm transition-all duration-200 hover:bg-white/8 ${
-          isPatent ? 'border-violet-500/20' : 'border-white/10'
+          isPatent ? 'border-violet-500/20' : isIdea ? 'border-amber-500/20' : 'border-white/10'
         }`}
       >
         {/* Accent bar for patents */}
         {isPatent && (
           <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-violet-500/60 via-[#00af51]/40 to-transparent" />
+        )}
+        {/* Accent bar for ideas */}
+        {isIdea && (
+          <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-amber-500/60 via-amber-400/30 to-transparent" />
         )}
 
         {/* Main clickable area */}
@@ -115,6 +122,18 @@ export default function IPCard({ item, index = 0 }: Props) {
             {item.notes && (
               <div className="mt-2 p-2 bg-[#f4ee19]/5 border border-[#f4ee19]/15 rounded-lg">
                 <p className="text-[#f4ee19]/70 text-[11px]">{item.notes}</p>
+              </div>
+            )}
+
+            {item.relatedProject && (
+              <div className="flex items-center gap-2">
+                <span className="text-white/25 text-[10px] uppercase tracking-wider w-16 shrink-0">Project</span>
+                <a
+                  href={item.relatedProject.href}
+                  className="text-[#00af51] text-xs hover:text-[#00af51]/80 transition-colors"
+                >
+                  {item.relatedProject.name} ↗
+                </a>
               </div>
             )}
 
