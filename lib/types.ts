@@ -1,16 +1,20 @@
 export type ProjectStatus = 'on-track' | 'needs-attention' | 'blocked' | 'paused' | 'complete';
-export type TaskStatus = 'todo' | 'in-progress' | 'done';
+export type TaskStatus = 'todo' | 'in-progress' | 'done' | 'blocked';
 export type IdeaStatus = 'raw' | 'developing' | 'ready' | 'archived';
 export type TeamMember = 'Luke' | 'Yannick' | 'Mike' | 'Max' | 'Phil';
+export type PriorityLevel = 'high' | 'medium' | 'low';
+export type AppContext = 'interlachen' | 'ryp' | 'personal';
 
 export interface Task {
   id: string;
   title: string;
+  description?: string;
   status: TaskStatus;
   projectId?: string;
   assignee?: TeamMember;
   dueDate?: string;
   priority: 1 | 2 | 3 | 4 | 5;
+  priorityLevel?: PriorityLevel;
   createdAt: string;
   completedAt?: string;
   notes?: string;
@@ -28,6 +32,7 @@ export interface Project {
   tasks: Task[];
   notes: string;
   updatedAt: string;
+  context?: AppContext;
 }
 
 export interface Idea {

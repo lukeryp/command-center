@@ -29,6 +29,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
   const [editingAction, setEditingAction] = useState(false);
   const [nextAction, setNextAction] = useState('');
   const [notes, setNotes] = useState('');
+  const [groupByStatus, setGroupByStatus] = useState(true);
 
   function loadData() {
     const p = getProject(id);
@@ -68,7 +69,14 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
     saveProject(updated);
   }
 
+  const totalTasks = tasks.length;
+  const doneTasks = tasks.filter(t => t.status === 'done').length;
+  const pct = totalTasks > 0 ? Math.round((doneTasks / totalTasks) * 100) : 0;
   const color = STATUS_COLOR[project.status];
+
+  const today = new Date().toISOString().slice(0, 10);
+  const overdueTasks = tasks.filter(t => t.dueDate && t.dueDate < today && t.status !== 'done');
+  const inProgressTasks = tasks.filter(t => t.status === 'in-progress');
 
   return (
     <div className="page">
@@ -78,10 +86,10 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
       </button>
 
       {/* Hero */}
-      <div className="mb-6 animate-fade-up">
+      <div className="mb-5 animate-fade-up">
         <div className="flex items-start gap-3 mb-4">
           <span className="text-4xl">{project.emoji}</span>
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <h1
               className="text-2xl font-bold text-white leading-tight"
               style={{ fontFamily: 'Raleway, sans-serif' }}
@@ -94,7 +102,23 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
           </div>
         </div>
 
-        {/* Status selector */}
+        {/* Progress bar */}
+        {totalTasks > 0 && (
+          <div className="mb-4">
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-xs text-white/40">{doneTasks} of {totalTasks} tasks complete</span>
+              <span className="text-xs font-semibold" style={{ color: project.color }}>{pct}%</span>
+            </div>
+            <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+              <div
+                className="h-full rounded-full transition-all duration-500"
+                style={{ width: `${pct}%`, background: project.color }}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Status pills */}
         <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
           {STATUS_OPTIONS.map(s => (
             <button
@@ -112,6 +136,32 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
           ))}
         </div>
       </div>
+
+      {/* Alerts */}
+      {overdueTasks.length > 0 && (
+        <div className="mb-4 flex items-center gap-2 bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-2.5 animate-fade-up">
+          <span className="text-red-400 text-sm">⚠</span>
+          <p className="text-red-400 text-sm font-medium">
+            {overdueTasks.length} overdue task{overdueTasks.length > 1 ? 's' : ''}
+          </p>
+        </div>
+      )}
+
+      {/* In-progress snapshot */}
+      {inProgressTasks.length > 0 && (
+        <div className="mb-4 bg-[#f4ee19]/5 border border-[#f4ee19]/15 rounded-xl px-4 py-3 animate-fade-up">
+          <p className="text-[#f4ee19]/70 text-xs uppercase tracking-wider mb-2">In Progress</p>
+          <div className="space-y-1.5">
+            {inProgressTasks.map(t => (
+              <div key={t.id} className="flex items-center gap-2">
+                <span className="text-[#f4ee19] text-sm">◑</span>
+                <span className="text-white/80 text-sm truncate">{t.title}</span>
+                {t.assignee && <span className="text-white/30 text-xs shrink-0">{t.assignee}</span>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Next action */}
       <div className="glass rounded-2xl p-4 mb-4 animate-fade-up" style={{ animationDelay: '60ms' }}>
@@ -140,12 +190,33 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
 
       {/* Tasks */}
       <div className="mb-4 animate-fade-up" style={{ animationDelay: '100ms' }}>
-        <h2 className="text-white/50 text-xs uppercase tracking-wider mb-3">Tasks</h2>
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-white/50 text-xs uppercase tracking-wider">Tasks</h2>
+          <div className="flex gap-1 bg-white/5 rounded-lg p-0.5">
+            <button
+              onClick={() => setGroupByStatus(true)}
+              className={`px-2.5 py-1 rounded-md text-xs font-medium transition-all ${
+                groupByStatus ? 'bg-white/10 text-white' : 'text-white/30 hover:text-white/60'
+              }`}
+            >
+              Grouped
+            </button>
+            <button
+              onClick={() => setGroupByStatus(false)}
+              className={`px-2.5 py-1 rounded-md text-xs font-medium transition-all ${
+                !groupByStatus ? 'bg-white/10 text-white' : 'text-white/30 hover:text-white/60'
+              }`}
+            >
+              List
+            </button>
+          </div>
+        </div>
         <TaskList
           tasks={tasks}
           projectId={id}
           onUpdate={loadData}
           showAssignee={true}
+          groupByStatus={groupByStatus}
         />
       </div>
 

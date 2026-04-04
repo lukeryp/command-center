@@ -1,7 +1,9 @@
 'use client';
 import { AppState, Project, Task, Idea, DailyPriority, SessionLog } from './types';
+import { SEED_TASKS } from './tasks-data';
 
 const KEY = 'ryp_cc_state';
+const SEED_VERSION = 2; // bump to re-seed tasks
 
 const DEFAULT_PROJECTS: Project[] = [
   {
@@ -16,6 +18,7 @@ const DEFAULT_PROJECTS: Project[] = [
     tasks: [],
     notes: '',
     updatedAt: new Date().toISOString(),
+    context: 'interlachen',
   },
   {
     id: 'forge',
@@ -29,6 +32,7 @@ const DEFAULT_PROJECTS: Project[] = [
     tasks: [],
     notes: '',
     updatedAt: new Date().toISOString(),
+    context: 'ryp',
   },
   {
     id: 'textbook',
@@ -42,6 +46,7 @@ const DEFAULT_PROJECTS: Project[] = [
     tasks: [],
     notes: '',
     updatedAt: new Date().toISOString(),
+    context: 'ryp',
   },
   {
     id: 'certification',
@@ -55,6 +60,7 @@ const DEFAULT_PROJECTS: Project[] = [
     tasks: [],
     notes: '',
     updatedAt: new Date().toISOString(),
+    context: 'ryp',
   },
   {
     id: 'foundation',
@@ -68,6 +74,7 @@ const DEFAULT_PROJECTS: Project[] = [
     tasks: [],
     notes: '',
     updatedAt: new Date().toISOString(),
+    context: 'ryp',
   },
   {
     id: 'chip',
@@ -81,37 +88,55 @@ const DEFAULT_PROJECTS: Project[] = [
     tasks: [],
     notes: '',
     updatedAt: new Date().toISOString(),
+    context: 'interlachen',
   },
 ];
 
-function load(): AppState {
+function load(): AppState & { seedVersion?: number } {
   if (typeof window === 'undefined') return defaultState();
   try {
     const raw = localStorage.getItem(KEY);
     if (!raw) return defaultState();
-    const parsed = JSON.parse(raw) as AppState;
-    // Merge in any new default projects that don't exist yet
+    const parsed = JSON.parse(raw) as AppState & { seedVersion?: number };
+    // Merge new default projects
     const existingIds = new Set(parsed.projects.map(p => p.id));
     DEFAULT_PROJECTS.forEach(dp => {
       if (!existingIds.has(dp.id)) parsed.projects.push(dp);
+      else {
+        // Backfill context on existing projects
+        const idx = parsed.projects.findIndex(p => p.id === dp.id);
+        if (idx >= 0 && !parsed.projects[idx].context) {
+          parsed.projects[idx].context = dp.context;
+        }
+      }
     });
+    // Seed tasks if not yet seeded at current version
+    if ((parsed.seedVersion ?? 0) < SEED_VERSION) {
+      const existingTaskIds = new Set(parsed.tasks.map(t => t.id));
+      SEED_TASKS.forEach(st => {
+        if (!existingTaskIds.has(st.id)) parsed.tasks.push(st);
+      });
+      (parsed as AppState & { seedVersion: number }).seedVersion = SEED_VERSION;
+      localStorage.setItem(KEY, JSON.stringify(parsed));
+    }
     return parsed;
   } catch {
     return defaultState();
   }
 }
 
-function defaultState(): AppState {
+function defaultState(): AppState & { seedVersion: number } {
   return {
     projects: DEFAULT_PROJECTS,
-    tasks: [],
+    tasks: SEED_TASKS,
     ideas: [],
     priorities: [],
     sessions: [],
+    seedVersion: SEED_VERSION,
   };
 }
 
-function save(state: AppState) {
+function save(state: AppState & { seedVersion?: number }) {
   if (typeof window === 'undefined') return;
   localStorage.setItem(KEY, JSON.stringify(state));
 }

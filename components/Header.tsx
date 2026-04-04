@@ -1,6 +1,8 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useAppContext } from '@/lib/app-context';
+import { AppContext } from '@/lib/types';
 
 const NAV = [
   { href: '/', label: 'Home', icon: '⌂' },
@@ -12,14 +14,22 @@ const NAV = [
   { href: '/ip', label: 'IP', icon: '⚖' },
 ];
 
+const CONTEXTS: { value: AppContext; label: string; short: string }[] = [
+  { value: 'interlachen', label: 'Interlachen', short: 'Club' },
+  { value: 'ryp', label: 'RYP', short: 'RYP' },
+  { value: 'personal', label: 'Personal', short: 'Me' },
+];
+
 export default function Header() {
   const path = usePathname();
+  const { activeContext, setActiveContext } = useAppContext();
 
   return (
     <>
       {/* Top bar */}
-      <header className="fixed top-0 left-0 right-0 z-40 bg-[#0d0d0d]/80 backdrop-blur-xl border-b border-white/8 px-4 h-14 flex items-center justify-between">
-        <div className="flex items-center gap-2">
+      <header className="fixed top-0 left-0 right-0 z-40 bg-[#0d0d0d]/80 backdrop-blur-xl border-b border-white/8 px-4 h-14 flex items-center justify-between gap-3">
+        {/* Brand */}
+        <div className="flex items-center gap-2 shrink-0">
           <div className="w-7 h-7 rounded-lg bg-[#00af51] flex items-center justify-center">
             <span className="text-black text-xs font-bold">R</span>
           </div>
@@ -27,7 +37,29 @@ export default function Header() {
             Command Center
           </span>
         </div>
-        <div className="text-white/40 text-xs">
+
+        {/* Context switcher pill */}
+        <div className="flex items-center bg-white/5 border border-white/10 rounded-full p-0.5 backdrop-blur-sm">
+          {CONTEXTS.map(ctx => {
+            const active = activeContext === ctx.value;
+            return (
+              <button
+                key={ctx.value}
+                onClick={() => setActiveContext(ctx.value)}
+                className={`px-3 py-1 rounded-full text-xs font-semibold transition-all duration-200 ${
+                  active ? 'text-black' : 'text-white/40 hover:text-white/70'
+                }`}
+                style={active ? { background: '#00af51', boxShadow: '0 0 14px #00af5155' } : {}}
+              >
+                <span className="hidden sm:inline">{ctx.label}</span>
+                <span className="sm:hidden">{ctx.short}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Date */}
+        <div className="text-white/40 text-xs shrink-0 hidden sm:block">
           {new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
         </div>
       </header>
