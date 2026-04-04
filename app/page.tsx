@@ -1,65 +1,106 @@
-import Image from "next/image";
+'use client';
+import { useState, useEffect } from 'react';
+import { getProjects } from '@/lib/store';
+import { Project } from '@/lib/types';
+import ProjectCard from '@/components/ProjectCard';
+import PriorityStack from '@/components/PriorityStack';
+import QuickCapture from '@/components/QuickCapture';
+import Link from 'next/link';
 
-export default function Home() {
+function getGreeting(): string {
+  const h = new Date().getHours();
+  if (h < 12) return 'Good morning';
+  if (h < 17) return 'Good afternoon';
+  return 'Good evening';
+}
+
+function getSessionPrompt(): { show: boolean; type: 'morning' | 'evening'; label: string } {
+  const h = new Date().getHours();
+  if (h >= 6 && h < 8) return { show: true, type: 'morning', label: 'Morning Review ready →' };
+  if (h >= 21 || h < 1) return { show: true, type: 'evening', label: 'Evening Wrap-up →' };
+  return { show: false, type: 'morning', label: '' };
+}
+
+export default function Dashboard() {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [time, setTime] = useState('');
+
+  useEffect(() => {
+    setProjects(getProjects());
+    const tick = () => setTime(new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }));
+    tick();
+    const t = setInterval(tick, 30000);
+    return () => clearInterval(t);
+  }, []);
+
+  const session = getSessionPrompt();
+  const needsAttention = projects.filter(p => p.status === 'needs-attention' || p.status === 'blocked');
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="page">
+      {/* Greeting */}
+      <div className="mb-6 animate-fade-up">
+        <p className="text-white/40 text-sm font-medium mb-0.5">{time}</p>
+        <h1
+          className="text-3xl font-bold text-white leading-tight"
+          style={{ fontFamily: 'Raleway, sans-serif' }}
+        >
+          {getGreeting()}, Luke.
+        </h1>
+        {needsAttention.length > 0 && (
+          <p className="text-[#f4ee19] text-sm mt-1 font-medium">
+            ⚠ {needsAttention.length} project{needsAttention.length > 1 ? 's' : ''} need attention
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        )}
+      </div>
+
+      {/* Session prompt */}
+      {session.show && (
+        <Link
+          href="/session"
+          className="block mb-5 animate-fade-up"
+          style={{ animationDelay: '60ms' }}
+        >
+          <div className="flex items-center gap-3 bg-[#00af51]/10 border border-[#00af51]/30 rounded-2xl px-5 py-3.5">
+            <div className="w-8 h-8 rounded-xl bg-[#00af51] flex items-center justify-center shrink-0">
+              <span className="text-black text-base">
+                {session.type === 'morning' ? '☀️' : '🌙'}
+              </span>
+            </div>
+            <span className="text-[#00af51] font-semibold text-sm">{session.label}</span>
+          </div>
+        </Link>
+      )}
+
+      {/* Priority Stack */}
+      <div className="animate-fade-up" style={{ animationDelay: '80ms' }}>
+        <PriorityStack />
+      </div>
+
+      {/* Quick Capture */}
+      <div className="mb-6 animate-fade-up" style={{ animationDelay: '120ms' }}>
+        <QuickCapture />
+      </div>
+
+      {/* Projects */}
+      <div className="animate-fade-up" style={{ animationDelay: '160ms' }}>
+        <div className="flex items-center justify-between mb-3">
+          <h2
+            className="text-white font-semibold text-sm uppercase tracking-widest opacity-50"
+            style={{ fontFamily: 'Raleway, sans-serif' }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Projects
+          </h2>
+          <Link href="/projects" className="text-[#00af51] text-sm font-medium">
+            All →
+          </Link>
         </div>
-      </main>
+        <div className="stagger grid grid-cols-1 gap-3">
+          {projects.map((p, i) => (
+            <ProjectCard key={p.id} project={p} index={i} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
