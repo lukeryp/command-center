@@ -8,6 +8,8 @@ const NAV = [
   { href: '/team', label: 'Team', icon: '◉' },
   { href: '/ideas', label: 'Ideas', icon: '◎' },
   { href: '/session', label: 'Session', icon: '◆' },
+  { href: '/sourcing', label: 'Sourcing', icon: '◫' },
+  { href: '/ip', label: 'IP', icon: '⚖' },
 ];
 
 export default function Header() {
@@ -39,7 +41,7 @@ export default function Header() {
               <Link
                 key={href}
                 href={href}
-                className={`flex flex-col items-center gap-0.5 px-3 py-2 rounded-xl transition-all min-w-[52px] ${
+                className={`flex flex-col items-center gap-0.5 px-2 py-2 rounded-xl transition-all min-w-[44px] ${
                   active ? 'text-[#00af51]' : 'text-white/40 hover:text-white/70'
                 }`}
               >
