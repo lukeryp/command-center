@@ -29,7 +29,7 @@ const DEFAULT_PROJECTS: Project[] = [
     stack: ['Next.js 14', 'Supabase', 'TypeScript', 'Tailwind', 'Vercel'],
     links: [
       { label: 'Live App', href: 'https://known.golf', type: 'deploy' },
-      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/monorepo/apps/known', type: 'repo' },
+      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/known-website', type: 'repo' },
     ],
     phases: [
       { id: 'k-p1', name: 'Core App', description: 'Auth, quiz, member data, dashboard', status: 'complete', items: ['Authentication flow', 'Quiz engine', 'Member database', 'Player dashboard'] },
@@ -62,6 +62,7 @@ const DEFAULT_PROJECTS: Project[] = [
     developer: 'Max',
     stack: ['Next.js 14', 'Supabase', 'TypeScript', 'Tailwind', 'Claude API', 'Vercel'],
     links: [
+      { label: 'Live App', href: 'https://ryp-red.vercel.app', type: 'deploy' },
       { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/ryp-red', type: 'repo' },
       { label: 'Build Plan', href: '/projects/ryp-red', type: 'spec' },
       { label: 'Patent (32 claims)', href: '#', type: 'doc' },
@@ -100,8 +101,7 @@ const DEFAULT_PROJECTS: Project[] = [
     developer: 'Max',
     stack: ['Next.js', 'Supabase', 'TypeScript', 'Tailwind'],
     links: [
-      { label: 'Live Site', href: 'https://cert.rypgolf.com', type: 'deploy' },
-      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/icc-junior-league-apply', type: 'repo' },
+      { label: 'Live App', href: 'https://cert.rypgolf.com', type: 'deploy' },
     ],
     phases: [
       { id: 'c-p1', name: 'Content', description: '17 chapters written and reviewed', status: 'on-track', items: ['Chapter content complete', 'Quiz questions per chapter', 'Video embeds', 'Progress tracking'] },
@@ -133,6 +133,10 @@ const DEFAULT_PROJECTS: Project[] = [
     owner: 'Luke',
     developer: 'Claude',
     stack: ['Next.js 14', 'TypeScript', 'Tailwind', 'PWA', 'localStorage'],
+    links: [
+      { label: 'Live App', href: 'https://command-center-nine-kappa.vercel.app', type: 'deploy' },
+      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/command-center', type: 'repo' },
+    ],
     phases: [
       { id: 'cc-p1', name: 'Core Modules', description: 'Projects, tasks, team, ideas, session logs', status: 'complete', items: ['Project tracker', 'Task management', 'Team page', 'Ideas capture', 'Session logs'] },
       { id: 'cc-p2', name: 'Specialist Modules', description: 'IP, sourcing, content machine', status: 'on-track', items: ['IP portfolio tracker', 'Sourcing pipeline', 'Content dashboard', 'Template gallery', 'Carousel archive'] },
@@ -462,6 +466,7 @@ const DEFAULT_PROJECTS: Project[] = [
     stack: ['Next.js', 'TypeScript', 'Tailwind', 'Vercel'],
     links: [
       { label: 'Live App', href: 'https://practice-dna.vercel.app', type: 'deploy' },
+      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/practice-dna', type: 'repo' },
     ],
     keyMetrics: [
       { label: 'Status', value: 'Live' },
