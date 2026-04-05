@@ -4,7 +4,7 @@ import { SEED_TASKS } from './tasks-data';
 import { SEED_IDEAS } from './ideas-data';
 
 const KEY = 'ryp_cc_state';
-const SEED_VERSION = 6; // bump to re-seed projects + tasks + ideas
+const SEED_VERSION = 7; // bump to re-seed projects + tasks + ideas
 
 const DEFAULT_PROJECTS: Project[] = [
   // ── DIGITAL PRODUCTS ─────────────────────────────────────────────────
@@ -566,6 +566,38 @@ const DEFAULT_PROJECTS: Project[] = [
     keyMetrics: [
       { label: 'Live URL', value: 'chip.rypgolf.com' },
       { label: 'Status', value: 'Deployed' },
+    ],
+  },
+
+  // ── INTERLACHEN ──────────────────────────────────────────────────────
+  {
+    id: 'icc-junior-league',
+    name: 'Junior League Applications',
+    status: 'on-track',
+    nextAction: 'Review 2026 applications via manager dashboard',
+    dueDate: '2026-06-01',
+    description: 'Junior League Applications 2026 — Manager Dashboard',
+    longDescription: 'Web app for managing Interlachen Country Club junior league applications for the 2026 season. Manager dashboard at /manager (PIN protected). Players and parents submit applications online; managers review, approve, and manage rosters.',
+    color: '#00af51',
+    emoji: '🏌️',
+    tasks: [],
+    notes: 'PIN: 1909',
+    updatedAt: new Date().toISOString(),
+    context: 'interlachen',
+    category: 'interlachen',
+    owner: 'Luke',
+    developer: 'Claude',
+    localPath: '~/Desktop/RYP-Projects/icc-junior-league-apply',
+    stack: ['Next.js', 'TypeScript', 'Tailwind', 'Vercel'],
+    links: [
+      { label: 'Manager Dashboard', href: 'https://icc-junior-league-apply.vercel.app/manager', type: 'deploy' },
+      { label: 'Apply Form', href: 'https://icc-junior-league-apply.vercel.app', type: 'external' },
+      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/icc-junior-league-apply', type: 'repo' },
+    ],
+    keyMetrics: [
+      { label: 'PIN', value: '1909' },
+      { label: 'Season', value: '2026' },
+      { label: 'Club', value: 'Interlachen' },
     ],
   },
 
