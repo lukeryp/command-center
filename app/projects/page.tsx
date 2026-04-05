@@ -20,6 +20,7 @@ const CATEGORIES: { key: ProjectCategory; label: string; icon: string }[] = [
   { key: 'marketing',         label: 'Marketing',          icon: '📣' },
   { key: 'operations',        label: 'Operations',         icon: '⚙️' },
   { key: 'infrastructure',    label: 'Infrastructure',     icon: '🔧' },
+  { key: 'interlachen',       label: 'Interlachen (ICC)',  icon: '🏌️' },
 ];
 
 function PhaseBar({ phases }: { phases: Project['phases'] }) {
