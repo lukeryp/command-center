@@ -49,6 +49,189 @@ const QUICK_LINKS = [
   { name: 'command-center',       url: 'https://command-center-nine-kappa.vercel.app' },
 ];
 
+// ── RYP Ecosystem Apps ───────────────────────────────────────────────────────
+
+type AppStatus = 'live' | 'built' | 'planned';
+
+interface RYPApp {
+  name: string;
+  description: string;
+  emoji: string;
+  status: AppStatus;
+  liveUrl?: string;
+  githubUrl?: string;
+  note?: string;
+  accent?: string;
+}
+
+const RYP_APPS: RYPApp[] = [
+  {
+    name: 'Known',
+    description: 'Member Recognition Training',
+    emoji: '⛳',
+    status: 'live',
+    liveUrl: 'https://known.golf',
+    accent: '#00af51',
+  },
+  {
+    name: 'Practice DNA',
+    description: 'Practice Assessment Quiz',
+    emoji: '🧬',
+    status: 'live',
+    liveUrl: 'https://practice-dna.vercel.app',
+    accent: '#f97316',
+  },
+  {
+    name: 'RYP Red',
+    description: 'Coaching & Scorecard Platform',
+    emoji: '🔴',
+    status: 'built',
+    githubUrl: 'https://github.com/lukeryp/ryp-red',
+    accent: '#ef4444',
+  },
+  {
+    name: 'FORGE',
+    description: 'Drill Scoring & RYP Performance Index',
+    emoji: '🔥',
+    status: 'built',
+    note: 'Module within Red',
+    accent: '#f4ee19',
+  },
+  {
+    name: 'Player Dashboard',
+    description: 'Unified Performance View',
+    emoji: '📊',
+    status: 'built',
+    githubUrl: 'https://github.com/lukeryp/ryp-player-dashboard',
+    accent: '#818cf8',
+  },
+  {
+    name: 'Kudo',
+    description: 'Recognition & Testimonials',
+    emoji: '⭐',
+    status: 'built',
+    githubUrl: 'https://github.com/lukeryp/kudo',
+    accent: '#eab308',
+  },
+  {
+    name: 'CHIP',
+    description: 'Golf Fitness Tracking',
+    emoji: '💪',
+    status: 'built',
+    githubUrl: 'https://github.com/lukeryp/chip',
+    liveUrl: 'https://chip.rypgolf.com',
+    accent: '#0ea5e9',
+  },
+  {
+    name: 'Certification',
+    description: 'Instructor Certification',
+    emoji: '🏅',
+    status: 'planned',
+    liveUrl: 'https://cert.rypgolf.com',
+    accent: '#f97316',
+  },
+  {
+    name: 'Golf Textbook',
+    description: 'Book Landing Page',
+    emoji: '📖',
+    status: 'planned',
+    accent: '#6366f1',
+  },
+  {
+    name: 'Command Center',
+    description: 'Master Brain PWA',
+    emoji: '🧠',
+    status: 'live',
+    liveUrl: 'https://command-center-nine-kappa.vercel.app',
+    accent: '#8b5cf6',
+  },
+  {
+    name: 'Shared UI Library',
+    description: 'Component Library (@ryp/ui)',
+    emoji: '🧩',
+    status: 'built',
+    note: '~/Desktop/RYP-Projects/ryp-ui/',
+    accent: '#00af51',
+  },
+  {
+    name: 'Shared Supabase',
+    description: 'Database',
+    emoji: '🗄️',
+    status: 'live',
+    note: 'ref: fcxyrebdegtjdsbasxfc',
+    liveUrl: 'https://supabase.com/dashboard',
+    accent: '#3ecf8e',
+  },
+];
+
+const APP_STATUS_CONFIG: Record<AppStatus, { label: string; cls: string; dot: string }> = {
+  live:    { label: 'LIVE',    cls: 'bg-[#00af51]/15 text-[#00af51] border-[#00af51]/30',  dot: 'bg-[#00af51]' },
+  built:   { label: 'BUILT',   cls: 'bg-[#f4ee19]/10 text-[#f4ee19] border-[#f4ee19]/25', dot: 'bg-[#f4ee19]' },
+  planned: { label: 'PLANNED', cls: 'bg-white/5 text-white/35 border-white/10',            dot: 'bg-white/25' },
+};
+
+function AppCard({ app }: { app: RYPApp }) {
+  const sc = APP_STATUS_CONFIG[app.status];
+  const primaryUrl = app.liveUrl || app.githubUrl;
+
+  return (
+    <div className="group relative bg-white/[0.03] border border-white/[0.06] hover:border-white/[0.12] hover:bg-white/[0.05] rounded-xl p-3 transition-all duration-200">
+      {/* Accent bar */}
+      <div
+        className="absolute top-0 left-0 w-full h-[2px] rounded-t-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+        style={{ background: app.accent || '#00af51' }}
+      />
+
+      <div className="flex items-start gap-2.5">
+        <span className="text-lg shrink-0 mt-0.5">{app.emoji}</span>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-1.5 mb-0.5">
+            <span className="text-white/85 text-xs font-semibold truncate" style={{ fontFamily: 'Raleway, sans-serif' }}>
+              {app.name}
+            </span>
+            <span className={`shrink-0 text-[9px] font-bold px-1.5 py-0.5 rounded-full border ${sc.cls}`}>
+              {sc.label}
+            </span>
+          </div>
+          <p className="text-white/35 text-[11px] leading-snug truncate">{app.description}</p>
+          {app.note && (
+            <p className="text-white/20 text-[10px] font-mono mt-0.5 truncate">{app.note}</p>
+          )}
+        </div>
+      </div>
+
+      {/* Links */}
+      <div className="flex items-center gap-2 mt-2.5">
+        {app.liveUrl && (
+          <a
+            href={app.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-[10px] font-mono text-[#00af51]/70 hover:text-[#00af51] transition-colors"
+          >
+            <span>↗</span>
+            <span className="truncate max-w-[120px]">{app.liveUrl.replace('https://', '')}</span>
+          </a>
+        )}
+        {app.githubUrl && (
+          <a
+            href={app.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-[10px] font-mono text-white/30 hover:text-white/60 transition-colors"
+          >
+            <span>⟨/⟩</span>
+            <span>{app.githubUrl.replace('https://github.com/', '')}</span>
+          </a>
+        )}
+        {!app.liveUrl && !app.githubUrl && app.status === 'planned' && (
+          <span className="text-[10px] font-mono text-white/15">not yet deployed</span>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function Dashboard() {
   const [projects, setProjects]   = useState<Project[]>([]);
   const [tasks, setTasks]         = useState<Task[]>([]);
@@ -129,6 +312,10 @@ export default function Dashboard() {
   const attn         = projects.filter(p => p.status === 'needs-attention');
   const canAddPriority = priorities.filter(p => !p.done).length < 3;
 
+  const liveCount    = RYP_APPS.filter(a => a.status === 'live').length;
+  const builtCount   = RYP_APPS.filter(a => a.status === 'built').length;
+  const plannedCount = RYP_APPS.filter(a => a.status === 'planned').length;
+
   return (
     <div className="page">
 
@@ -158,6 +345,43 @@ export default function Dashboard() {
         <span>IDEAS&nbsp;<span className="text-white/60">{ideas.length}</span></span>
         <span>BLOCKED&nbsp;<span className={blocked.length > 0 ? 'text-red-400' : 'text-white/30'}>{blocked.length}</span></span>
         <span>PRIORITIES&nbsp;<span className="text-white/60">{priorities.filter(p => !p.done).length}/3</span></span>
+      </div>
+
+      {/* ── RYP Ecosystem ──────────────────────────────────────────────── */}
+      <div className="mb-5">
+        <div className="flex items-center justify-between mb-3">
+          <div>
+            <h2
+              className="text-sm font-bold text-white"
+              style={{ fontFamily: 'Raleway, sans-serif' }}
+            >
+              RYP Ecosystem
+            </h2>
+            <p className="font-mono text-[10px] text-white/25 mt-0.5">
+              {liveCount} live · {builtCount} built · {plannedCount} planned
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="flex items-center gap-1.5 font-mono text-[10px]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#00af51] inline-block" />
+              <span className="text-white/30">live</span>
+            </span>
+            <span className="flex items-center gap-1.5 font-mono text-[10px]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#f4ee19] inline-block" />
+              <span className="text-white/30">built</span>
+            </span>
+            <span className="flex items-center gap-1.5 font-mono text-[10px]">
+              <span className="w-1.5 h-1.5 rounded-full bg-white/25 inline-block" />
+              <span className="text-white/30">planned</span>
+            </span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+          {RYP_APPS.map(app => (
+            <AppCard key={app.name} app={app} />
+          ))}
+        </div>
       </div>
 
       {/* ── Main 2-col Grid ────────────────────────────────────────────── */}
