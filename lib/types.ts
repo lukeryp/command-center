@@ -4,7 +4,7 @@ export type IdeaStatus = 'raw' | 'developing' | 'ready' | 'archived';
 export type TeamMember = 'Luke' | 'Yannick' | 'Mike' | 'Max' | 'Phil' | 'Teddy' | 'Claude';
 export type PriorityLevel = 'high' | 'medium' | 'low';
 export type AppContext = 'interlachen' | 'ryp' | 'personal';
-export type ProjectCategory = 'physical-products' | 'digital-products' | 'marketing' | 'operations' | 'infrastructure';
+export type ProjectCategory = 'physical-products' | 'digital-products' | 'marketing' | 'operations' | 'infrastructure' | 'interlachen';
 
 export interface Task {
   id: string;
