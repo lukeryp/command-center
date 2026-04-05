@@ -35,7 +35,7 @@ export default function PinGate({ onUnlock }: Props) {
       } catch {
         // fallback: client-side hash check
         const hash = await sha256(val);
-        if (hash === '9e79ba0c9a83b9eb5e1fd68d0fde8e24c3db3d9d0c5620f19d3a1636bfc68619') {
+        if (hash === '8e614d39a1f1279958da1c9f7e8df51db4aabca8cc3a3e84f8c3dc5f88e1fcfb') {
           onUnlock();
         } else {
           triggerError('Incorrect PIN');
