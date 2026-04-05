@@ -4,7 +4,7 @@ import { SEED_TASKS } from './tasks-data';
 import { SEED_IDEAS } from './ideas-data';
 
 const KEY = 'ryp_cc_state';
-const SEED_VERSION = 4; // bump to re-seed projects + tasks + ideas
+const SEED_VERSION = 6; // bump to re-seed projects + tasks + ideas
 
 const DEFAULT_PROJECTS: Project[] = [
   // ── DIGITAL PRODUCTS ─────────────────────────────────────────────────
@@ -15,6 +15,7 @@ const DEFAULT_PROJECTS: Project[] = [
     nextAction: 'Deploy manager dashboard to production',
     dueDate: '2026-04-30',
     description: 'Member recognition training app for country clubs',
+    localPath: '~/Desktop/RYP-Projects/monorepo/apps/known',
     longDescription: 'Known is a digital platform that helps golf professionals recognize and greet every member by name. Multi-club architecture with Supabase backend, manager dashboards, and quiz-based learning system. Currently deployed at Interlachen with 17 spec items complete.',
     color: '#00af51',
     emoji: '⛳',
@@ -28,7 +29,7 @@ const DEFAULT_PROJECTS: Project[] = [
     stack: ['Next.js 14', 'Supabase', 'TypeScript', 'Tailwind', 'Vercel'],
     links: [
       { label: 'Live App', href: 'https://known.golf', type: 'deploy' },
-      { label: 'Repo', href: 'https://github.com/', type: 'repo' },
+      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/monorepo/apps/known', type: 'repo' },
     ],
     phases: [
       { id: 'k-p1', name: 'Core App', description: 'Auth, quiz, member data, dashboard', status: 'complete', items: ['Authentication flow', 'Quiz engine', 'Member database', 'Player dashboard'] },
@@ -48,6 +49,7 @@ const DEFAULT_PROJECTS: Project[] = [
     nextAction: 'Phase 1: Card scan → SSL/ESL → dashboard loop',
     dueDate: '2026-05-15',
     description: 'Golf analytics platform — prospective aim capture + strategy-execution decomposition',
+    localPath: '~/Desktop/RYP-Projects/ryp-red',
     longDescription: 'RYP Red is the only golf analytics platform that captures a player\'s intended aim point BEFORE the shot, then decomposes the outcome into Course IQ (decision quality) and Strike Score (execution quality). Protected by 32 patent claims. Long-term competitor to 18 Birdies and DECADE.',
     color: '#ef4444',
     emoji: '🔴',
@@ -60,9 +62,9 @@ const DEFAULT_PROJECTS: Project[] = [
     developer: 'Max',
     stack: ['Next.js 14', 'Supabase', 'TypeScript', 'Tailwind', 'Claude API', 'Vercel'],
     links: [
+      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/ryp-red', type: 'repo' },
       { label: 'Build Plan', href: '/projects/ryp-red', type: 'spec' },
       { label: 'Patent (32 claims)', href: '#', type: 'doc' },
-      { label: 'Data Audit', href: '#', type: 'doc' },
     ],
     phases: [
       { id: 'r-p1', name: 'Phase 1: Core Loop', description: 'Scan card → extraction → SSL/ESL → dashboard', status: 'on-track', items: ['Supabase project setup', 'Vercel deploy', 'Physical scorecard design', 'End-to-end scan loop', 'Onboarding flow', 'Consumer vocabulary UI', 'Coach invite flow', 'First 5 Interlachen players'] },
@@ -85,6 +87,7 @@ const DEFAULT_PROJECTS: Project[] = [
     nextAction: 'Beta test with 7 Interlachen pros',
     dueDate: '2026-05-30',
     description: 'L1 instructor certification — 17 chapters, quiz engine, CoachNow diagnosis',
+    localPath: '~/Desktop/RYP-Projects/certification',
     longDescription: 'RYP Golf L1 Instructor Certification program. 17 chapters covering the full FORGE methodology, quiz engine with pass/fail tracking, cohort progress dashboard, and CoachNow swing diagnosis integration. Beta testing with 7 Interlachen professionals.',
     color: '#f97316',
     emoji: '🏅',
@@ -97,7 +100,8 @@ const DEFAULT_PROJECTS: Project[] = [
     developer: 'Max',
     stack: ['Next.js', 'Supabase', 'TypeScript', 'Tailwind'],
     links: [
-      { label: 'Cert Site', href: 'https://cert.rypgolf.com', type: 'deploy' },
+      { label: 'Live Site', href: 'https://cert.rypgolf.com', type: 'deploy' },
+      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/icc-junior-league-apply', type: 'repo' },
     ],
     phases: [
       { id: 'c-p1', name: 'Content', description: '17 chapters written and reviewed', status: 'on-track', items: ['Chapter content complete', 'Quiz questions per chapter', 'Video embeds', 'Progress tracking'] },
@@ -117,6 +121,7 @@ const DEFAULT_PROJECTS: Project[] = [
     nextAction: 'Deepen project pages with expand/collapse flows',
     dueDate: '2026-04-30',
     description: 'Master brain PWA — projects, tasks, team, IP, content, sourcing',
+    localPath: '~/Desktop/RYP-Projects/command-center',
     longDescription: 'The Command Center is Luke\'s operational headquarters. PWA with daily sessions, project tracker, team tasks, meeting debriefs, idea capture, IP portfolio, sourcing pipeline, and content management. Runs as an installable app on phone.',
     color: '#8b5cf6',
     emoji: '🧠',
@@ -345,8 +350,8 @@ const DEFAULT_PROJECTS: Project[] = [
     status: 'on-track',
     nextAction: 'Finalize Q2 marketing plan',
     dueDate: '2026-04-15',
-    description: 'Interlachen coaching program — member engagement',
-    longDescription: 'CHIP is the Interlachen-specific coaching and instruction program. Focused on member engagement, lesson bookings, and player development within the club.',
+    description: 'Golf fitness & coaching program — Interlachen member engagement',
+    longDescription: 'CHIP (Coaching & High-performance Interlachen Program) is RYP\'s on-site golf fitness and instruction program at Interlachen Country Club. Covers fitness screening, strength/mobility, player development, lesson packages, and member engagement. Q2 programming underway.',
     color: '#0ea5e9',
     emoji: '🎯',
     tasks: [],
@@ -383,6 +388,182 @@ const DEFAULT_PROJECTS: Project[] = [
       { label: 'Status', value: 'Strategy Needed' },
     ],
   },
+  // ── INFRASTRUCTURE ───────────────────────────────────────────────────
+  {
+    id: 'ryp-ui',
+    name: '@ryp/ui',
+    status: 'complete',
+    nextAction: 'Use in all new RYP apps',
+    description: 'Shared component library — used across all RYP products',
+    longDescription: 'The @ryp/ui shared component library contains all reusable UI primitives: buttons, inputs, cards, modals, status badges, typography, and brand tokens. Built on Tailwind with Raleway + Work Sans fonts and RYP brand colors (#00af51, #f4ee19, #000). Starting point for every new RYP app.',
+    color: '#00af51',
+    emoji: '🧩',
+    tasks: [],
+    notes: '',
+    updatedAt: new Date().toISOString(),
+    context: 'ryp',
+    category: 'digital-products',
+    localPath: '~/Desktop/RYP-Projects/ryp-ui',
+    owner: 'Luke',
+    developer: 'Claude',
+    stack: ['React', 'TypeScript', 'Tailwind'],
+    links: [
+      { label: 'Local: ~/RYP-Projects/ryp-ui/', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/ryp-ui', type: 'repo' },
+    ],
+    keyMetrics: [
+      { label: 'Status', value: 'Complete' },
+      { label: 'Used By', value: 'All RYP apps' },
+    ],
+  },
+  {
+    id: 'ryp-supabase',
+    name: 'Shared Supabase',
+    status: 'on-track',
+    nextAction: 'Keep migrations and seed data in sync across all apps',
+    description: 'Shared Supabase project — migrations, seed data, and types for the RYP ecosystem',
+    longDescription: 'ryp-supabase is the source of truth for all shared database migrations, seed data, and generated TypeScript types. Manages RLS policies, multi-club isolation patterns, and the shared schema used by Known, RYP Red, Certification, and Kudo.',
+    color: '#3ecf8e',
+    emoji: '🗄️',
+    tasks: [],
+    notes: '',
+    updatedAt: new Date().toISOString(),
+    context: 'ryp',
+    category: 'digital-products',
+    localPath: '~/Desktop/RYP-Projects/ryp-supabase',
+    owner: 'Luke',
+    stack: ['Supabase', 'PostgreSQL', 'TypeScript'],
+    links: [
+      { label: 'Supabase Dashboard', href: 'https://supabase.com/dashboard', type: 'external' },
+    ],
+    keyMetrics: [
+      { label: 'Products Connected', value: '4' },
+      { label: 'RLS', value: 'Active' },
+    ],
+  },
+
+  // ── ADDITIONAL DIGITAL PRODUCTS ──────────────────────────────────────
+  {
+    id: 'practice-dna',
+    name: 'Practice DNA',
+    status: 'on-track',
+    nextAction: 'Drive traffic — link from rypgolf.com and social',
+    description: 'Interactive quiz identifying a golfer\'s practice style and DNA',
+    longDescription: 'Practice DNA is an interactive assessment that identifies how a golfer learns and practices best. Generates a personalized practice DNA profile. Live at practice-dna.vercel.app. Top-of-funnel lead gen for the RYP ecosystem.',
+    color: '#f97316',
+    emoji: '🧬',
+    tasks: [],
+    notes: '',
+    updatedAt: new Date().toISOString(),
+    context: 'ryp',
+    category: 'digital-products',
+    owner: 'Luke',
+    developer: 'Claude',
+    localPath: '~/Desktop/RYP-Projects/practice-dna',
+    stack: ['Next.js', 'TypeScript', 'Tailwind', 'Vercel'],
+    links: [
+      { label: 'Live App', href: 'https://practice-dna.vercel.app', type: 'deploy' },
+    ],
+    keyMetrics: [
+      { label: 'Status', value: 'Live' },
+      { label: 'Purpose', value: 'Lead Gen / Top of Funnel' },
+    ],
+  },
+  {
+    id: 'kudo',
+    name: 'Kudo',
+    status: 'needs-attention',
+    nextAction: 'Create Supabase project to go live',
+    description: 'Testimonial pipeline app — recognition and feedback collection',
+    longDescription: 'Kudo is a testimonial and recognition pipeline app for RYP Golf. Scaffold complete at ~/Desktop/RYP-Projects/kudo/. Needs Supabase project created to go live. Collects player/member feedback and generates shareable testimonial cards.',
+    color: '#fbbf24',
+    emoji: '⭐',
+    tasks: [],
+    notes: '',
+    updatedAt: new Date().toISOString(),
+    context: 'ryp',
+    category: 'digital-products',
+    owner: 'Luke',
+    developer: 'Claude',
+    localPath: '~/Desktop/RYP-Projects/kudo',
+    stack: ['Next.js', 'Supabase', 'TypeScript', 'Tailwind'],
+    links: [
+      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/kudo', type: 'repo' },
+    ],
+    phases: [
+      { id: 'kudo-p1', name: 'Scaffold', description: 'App structure and UI', status: 'complete', items: ['Next.js scaffold', 'UI components', 'Testimonial form', 'Card generator'] },
+      { id: 'kudo-p2', name: 'Backend', description: 'Supabase project + live deploy', status: 'needs-attention', items: ['Create Supabase project', 'Schema migration', 'Auth setup', 'Deploy to Vercel'] },
+    ],
+    keyMetrics: [
+      { label: 'Scaffold', value: 'Complete' },
+      { label: 'Supabase', value: 'Not Yet Created' },
+    ],
+  },
+  {
+    id: 'forge-app',
+    name: 'FORGE App',
+    status: 'on-track',
+    nextAction: 'Wire drill scoring to Supabase backend',
+    dueDate: '2026-05-15',
+    description: 'FORGE practice scoring app — digital companion to the drill system',
+    longDescription: 'Digital companion to the FORGE training methodology. Coaches and players log practice sessions, score drills, and track progression. Data connects to the RYP Red analytics pipeline. Built as a standalone app in the RYP monorepo.',
+    color: '#f4ee19',
+    emoji: '🔥',
+    tasks: [],
+    notes: '',
+    updatedAt: new Date().toISOString(),
+    context: 'ryp',
+    category: 'digital-products',
+    owner: 'Luke',
+    developer: 'Claude',
+    localPath: '~/Desktop/RYP-Projects/monorepo/apps/forge-app',
+    stack: ['Node.js', 'HTML/CSS', 'Supabase'],
+    links: [
+      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/monorepo/apps/forge-app', type: 'repo' },
+      { label: 'FORGE Physical', href: '/projects/forge', type: 'spec' },
+    ],
+    phases: [
+      { id: 'fa-p1', name: 'Scaffold', description: 'App shell + drill scoring UI', status: 'complete', items: ['App scaffold', 'Drill scoring screens', 'Session log UI', 'Progress dashboard'] },
+      { id: 'fa-p2', name: 'Backend', description: 'Supabase integration + persistence', status: 'on-track', items: ['Supabase schema', 'Session persistence', 'Player accounts', 'Score history'] },
+      { id: 'fa-p3', name: 'RYP Red Integration', description: 'Feed practice data into analytics', status: 'pending', items: ['Data pipeline to RYP Red', 'Practice-to-performance correlation', 'Coach access'] },
+    ],
+    keyMetrics: [
+      { label: 'Status', value: 'Built — needs backend' },
+      { label: 'Location', value: 'monorepo/apps/forge-app' },
+    ],
+  },
+  {
+    id: 'chip-fitness',
+    name: 'CHIP Fitness App',
+    status: 'on-track',
+    nextAction: 'Onboard first Interlachen members to the fitness tracker',
+    dueDate: '2026-05-01',
+    description: 'Golf fitness tracker — strength, mobility, and performance benchmarks',
+    longDescription: 'CHIP Fitness is a mobile-first Next.js app for golf-specific fitness tracking. Members log strength exercises, mobility scores, and performance benchmarks. Built with full RYP brand identity (Green/Yellow/Black, Raleway). Deployed at chip.rypgolf.com.',
+    color: '#0ea5e9',
+    emoji: '💪',
+    tasks: [],
+    notes: '',
+    updatedAt: new Date().toISOString(),
+    context: 'interlachen',
+    category: 'digital-products',
+    owner: 'Luke',
+    developer: 'Claude',
+    localPath: '~/Desktop/RYP-Projects/chip',
+    stack: ['Next.js', 'Supabase', 'TypeScript', 'Tailwind', 'Vercel'],
+    links: [
+      { label: 'Live App', href: 'https://chip.rypgolf.com', type: 'deploy' },
+      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/chip', type: 'repo' },
+    ],
+    phases: [
+      { id: 'cf-p1', name: 'Core App', description: 'Auth, workout tracking, progress dashboard', status: 'complete', items: ['Auth flow (Supabase)', 'Workout logging', 'Mobility scoring', 'Progress dashboard'] },
+      { id: 'cf-p2', name: 'Club Rollout', description: 'Interlachen member onboarding', status: 'on-track', items: ['Member accounts', 'Coach access', 'Progress reports', 'Program assignments'] },
+    ],
+    keyMetrics: [
+      { label: 'Live URL', value: 'chip.rypgolf.com' },
+      { label: 'Status', value: 'Deployed' },
+    ],
+  },
+
 ];
 
 function load(): AppState & { seedVersion?: number } {
@@ -396,15 +577,26 @@ function load(): AppState & { seedVersion?: number } {
     DEFAULT_PROJECTS.forEach(dp => {
       if (!existingIds.has(dp.id)) parsed.projects.push(dp);
       else {
-        // Backfill context on existing projects
+        // Backfill fields on existing projects
         const idx = parsed.projects.findIndex(p => p.id === dp.id);
-        if (idx >= 0 && !parsed.projects[idx].context) {
-          parsed.projects[idx].context = dp.context;
+        if (idx >= 0) {
+          if (!parsed.projects[idx].context) parsed.projects[idx].context = dp.context;
+          if (!parsed.projects[idx].localPath && dp.localPath) parsed.projects[idx].localPath = dp.localPath;
+          if (dp.category) parsed.projects[idx].category = dp.category;
         }
       }
     });
-    // Seed tasks + ideas if not yet seeded at current version
+    // Seed tasks + ideas + sync project data if not yet at current version
     if ((parsed.seedVersion ?? 0) < SEED_VERSION) {
+      // Sync project links, localPath, stack, and description from defaults
+      DEFAULT_PROJECTS.forEach(dp => {
+        const idx = parsed.projects.findIndex(p => p.id === dp.id);
+        if (idx >= 0) {
+          if (dp.links) parsed.projects[idx].links = dp.links;
+          if (dp.localPath) parsed.projects[idx].localPath = dp.localPath;
+          if (dp.stack) parsed.projects[idx].stack = dp.stack;
+        }
+      });
       const existingTaskIds = new Set(parsed.tasks.map(t => t.id));
       SEED_TASKS.forEach(st => {
         if (!existingTaskIds.has(st.id)) parsed.tasks.push(st);
