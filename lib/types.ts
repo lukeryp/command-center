@@ -4,7 +4,7 @@ export type IdeaStatus = 'raw' | 'developing' | 'ready' | 'archived';
 export type TeamMember = 'Luke' | 'Yannick' | 'Mike' | 'Max' | 'Phil' | 'Teddy' | 'Claude';
 export type PriorityLevel = 'high' | 'medium' | 'low';
 export type AppContext = 'interlachen' | 'ryp' | 'personal';
-export type ProjectCategory = 'physical-products' | 'digital-products' | 'marketing' | 'operations';
+export type ProjectCategory = 'physical-products' | 'digital-products' | 'marketing' | 'operations' | 'infrastructure';
 
 export interface Task {
   id: string;
@@ -50,6 +50,7 @@ export interface Project {
   updatedAt: string;
   context?: AppContext;
   category?: ProjectCategory;
+  localPath?: string;
   owner?: TeamMember;
   developer?: TeamMember;
   phases?: ProjectPhase[];
