@@ -4,7 +4,7 @@ import { SEED_TASKS } from './tasks-data';
 import { SEED_IDEAS } from './ideas-data';
 
 const KEY = 'ryp_cc_state';
-const SEED_VERSION = 7; // bump to re-seed projects + tasks + ideas
+const SEED_VERSION = 8; // bump to re-seed projects + tasks + ideas
 
 const DEFAULT_PROJECTS: Project[] = [
   // ── DIGITAL PRODUCTS ─────────────────────────────────────────────────
@@ -15,7 +15,7 @@ const DEFAULT_PROJECTS: Project[] = [
     nextAction: 'Deploy manager dashboard to production',
     dueDate: '2026-04-30',
     description: 'Member recognition training app for country clubs',
-    localPath: '~/Desktop/RYP-Projects/monorepo/apps/known',
+    localPath: '~/Desktop/RYP-Projects/known-website',
     longDescription: 'Known is a digital platform that helps golf professionals recognize and greet every member by name. Multi-club architecture with Supabase backend, manager dashboards, and quiz-based learning system. Currently deployed at Interlachen with 17 spec items complete.',
     color: '#00af51',
     emoji: '⛳',
@@ -29,6 +29,7 @@ const DEFAULT_PROJECTS: Project[] = [
     stack: ['Next.js 14', 'Supabase', 'TypeScript', 'Tailwind', 'Vercel'],
     links: [
       { label: 'Live App', href: 'https://known.golf', type: 'deploy' },
+      { label: 'GitHub', href: 'https://github.com/lukeryp/interlachen-quiz', type: 'repo' },
       { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/known-website', type: 'repo' },
     ],
     phases: [
@@ -63,6 +64,7 @@ const DEFAULT_PROJECTS: Project[] = [
     stack: ['Next.js 14', 'Supabase', 'TypeScript', 'Tailwind', 'Claude API', 'Vercel'],
     links: [
       { label: 'Live App', href: 'https://ryp-red.vercel.app', type: 'deploy' },
+      { label: 'GitHub', href: 'https://github.com/lukeryp/ryp-red', type: 'repo' },
       { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/ryp-red', type: 'repo' },
       { label: 'Build Plan', href: '/projects/ryp-red', type: 'spec' },
       { label: 'Patent (32 claims)', href: '#', type: 'doc' },
@@ -88,7 +90,7 @@ const DEFAULT_PROJECTS: Project[] = [
     nextAction: 'Beta test with 7 Interlachen pros',
     dueDate: '2026-05-30',
     description: 'L1 instructor certification — 17 chapters, quiz engine, CoachNow diagnosis',
-    localPath: '~/Desktop/RYP-Projects/certification',
+    localPath: '~/Desktop/RYP-Projects/ryp-certification',
     longDescription: 'RYP Golf L1 Instructor Certification program. 17 chapters covering the full FORGE methodology, quiz engine with pass/fail tracking, cohort progress dashboard, and CoachNow swing diagnosis integration. Beta testing with 7 Interlachen professionals.',
     color: '#f97316',
     emoji: '🏅',
@@ -102,6 +104,7 @@ const DEFAULT_PROJECTS: Project[] = [
     stack: ['Next.js', 'Supabase', 'TypeScript', 'Tailwind'],
     links: [
       { label: 'Live App', href: 'https://cert.rypgolf.com', type: 'deploy' },
+      { label: 'GitHub', href: 'https://github.com/lukeryp/ryp-certification', type: 'repo' },
     ],
     phases: [
       { id: 'c-p1', name: 'Content', description: '17 chapters written and reviewed', status: 'on-track', items: ['Chapter content complete', 'Quiz questions per chapter', 'Video embeds', 'Progress tracking'] },
@@ -394,6 +397,33 @@ const DEFAULT_PROJECTS: Project[] = [
   },
   // ── INFRASTRUCTURE ───────────────────────────────────────────────────
   {
+    id: 'ryp-hub',
+    name: 'RYP Hub',
+    status: 'built',
+    nextAction: 'Define purpose and deploy',
+    description: 'Central RYP hub — content, products, and ecosystem entry point',
+    longDescription: 'RYP Hub is the central entry point for the RYP Golf digital ecosystem. Aggregates content, products, and tools across all RYP properties. Not yet deployed.',
+    color: '#00af51',
+    emoji: '🌐',
+    tasks: [],
+    notes: '',
+    updatedAt: new Date().toISOString(),
+    context: 'ryp',
+    category: 'infrastructure',
+    owner: 'Luke',
+    developer: 'Claude',
+    localPath: '~/Desktop/ryp-hub',
+    stack: ['Next.js', 'TypeScript', 'Tailwind'],
+    links: [
+      { label: 'GitHub', href: 'https://github.com/lukeryp/ryp-hub', type: 'repo' },
+      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/ryp-hub', type: 'repo' },
+    ],
+    keyMetrics: [
+      { label: 'Status', value: 'Built — not deployed' },
+      { label: 'Location', value: '~/Desktop/ryp-hub' },
+    ],
+  },
+  {
     id: 'ryp-ui',
     name: '@ryp/ui',
     status: 'complete',
@@ -492,6 +522,7 @@ const DEFAULT_PROJECTS: Project[] = [
     localPath: '~/Desktop/RYP-Projects/kudo',
     stack: ['Next.js', 'Supabase', 'TypeScript', 'Tailwind'],
     links: [
+      { label: 'GitHub', href: 'https://github.com/lukeryp/kudo', type: 'repo' },
       { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/kudo', type: 'repo' },
     ],
     phases: [
@@ -557,6 +588,7 @@ const DEFAULT_PROJECTS: Project[] = [
     stack: ['Next.js', 'Supabase', 'TypeScript', 'Tailwind', 'Vercel'],
     links: [
       { label: 'Live App', href: 'https://chip.rypgolf.com', type: 'deploy' },
+      { label: 'GitHub', href: 'https://github.com/lukeryp/chip', type: 'repo' },
       { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/chip', type: 'repo' },
     ],
     phases: [
@@ -566,6 +598,41 @@ const DEFAULT_PROJECTS: Project[] = [
     keyMetrics: [
       { label: 'Live URL', value: 'chip.rypgolf.com' },
       { label: 'Status', value: 'Deployed' },
+    ],
+  },
+
+  // ── DIGITAL PRODUCTS (continued) ─────────────────────────────────────
+  {
+    id: 'player-dashboard',
+    name: 'Player Dashboard',
+    status: 'on-track',
+    nextAction: 'Wire to live RYP Red data and deploy',
+    dueDate: '2026-06-01',
+    description: 'Unified performance view — Course IQ, Strike Score, practice trends',
+    longDescription: 'The RYP Player Dashboard is the unified performance hub for a player\'s entire RYP ecosystem data: Course IQ from RYP Red, drill progression from FORGE, speed metrics from Rypstick, and practice DNA. Single view of the full player.',
+    color: '#818cf8',
+    emoji: '📊',
+    tasks: [],
+    notes: '',
+    updatedAt: new Date().toISOString(),
+    context: 'ryp',
+    category: 'digital-products',
+    owner: 'Luke',
+    developer: 'Claude',
+    localPath: '~/Desktop/RYP-Projects/player-dashboard',
+    stack: ['Next.js', 'Supabase', 'TypeScript', 'Tailwind', 'Vercel'],
+    links: [
+      { label: 'Live App', href: 'https://ryp-player-dashboard.vercel.app', type: 'deploy' },
+      { label: 'GitHub', href: 'https://github.com/lukeryp/ryp-player-dashboard', type: 'repo' },
+      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/player-dashboard', type: 'repo' },
+    ],
+    phases: [
+      { id: 'pd2-p1', name: 'Core View', description: 'Unified stats from all RYP products', status: 'on-track', items: ['RYP Red data integration', 'Course IQ + Strike Score display', 'Practice trend charts', 'Session history'] },
+      { id: 'pd2-p2', name: 'Live Data', description: 'Wire to production Supabase', status: 'pending', items: ['Supabase integration', 'Auth + player profiles', 'Coach access', 'Share links'] },
+    ],
+    keyMetrics: [
+      { label: 'Live', value: 'ryp-player-dashboard.vercel.app' },
+      { label: 'Phase', value: 'Core View' },
     ],
   },
 
