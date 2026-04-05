@@ -9,6 +9,8 @@ const AVATARS: Record<TM, string> = {
   Mike:    '👤',
   Max:     '👤',
   Phil:    '👤',
+  Teddy:   '👤',
+  Claude:  '🤖',
 };
 
 const COLORS: Record<TM, string> = {
@@ -17,6 +19,8 @@ const COLORS: Record<TM, string> = {
   Mike:    '#6366f1',
   Max:     '#f97316',
   Phil:    '#0ea5e9',
+  Teddy:   '#a855f7',
+  Claude:  '#8b5cf6',
 };
 
 interface Props {

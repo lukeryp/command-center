@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Raleway, Work_Sans } from 'next/font/google';
+import { Raleway, Work_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import AuthProvider from '@/components/AuthProvider';
@@ -15,6 +15,12 @@ const raleway = Raleway({
 const workSans = Work_Sans({
   subsets: ['latin'],
   variable: '--font-work-sans',
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
   display: 'swap',
 });
 
@@ -38,7 +44,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${raleway.variable} ${workSans.variable} h-full`}>
+    <html lang="en" className={`${raleway.variable} ${workSans.variable} ${jetbrainsMono.variable} h-full`}>
       <body className="min-h-full bg-[#0d0d0d] text-white antialiased">
         <AuthProvider>
           <AppContextProvider>

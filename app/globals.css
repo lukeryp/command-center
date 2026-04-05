@@ -24,6 +24,10 @@ html, body {
   overscroll-behavior: none;
 }
 
+.font-mono {
+  font-family: var(--font-mono), 'JetBrains Mono', ui-monospace, monospace;
+}
+
 .pb-safe {
   padding-bottom: max(env(safe-area-inset-bottom), 8px);
 }
@@ -64,6 +68,25 @@ html, body {
 .page {
   min-height: 100svh;
   padding: 72px 16px 96px;
-  max-width: 640px;
+  max-width: 900px;
   margin: 0 auto;
+}
+
+/* Terminal cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.animate-blink { animation: blink 1s step-end infinite; }
+
+/* Scanline overlay for terminal feel */
+.scanlines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
 }

@@ -1,9 +1,10 @@
-export type ProjectStatus = 'on-track' | 'needs-attention' | 'blocked' | 'paused' | 'complete';
+export type ProjectStatus = 'on-track' | 'needs-attention' | 'blocked' | 'paused' | 'complete' | 'pending';
 export type TaskStatus = 'todo' | 'in-progress' | 'done' | 'blocked';
 export type IdeaStatus = 'raw' | 'developing' | 'ready' | 'archived';
-export type TeamMember = 'Luke' | 'Yannick' | 'Mike' | 'Max' | 'Phil';
+export type TeamMember = 'Luke' | 'Yannick' | 'Mike' | 'Max' | 'Phil' | 'Teddy' | 'Claude';
 export type PriorityLevel = 'high' | 'medium' | 'low';
 export type AppContext = 'interlachen' | 'ryp' | 'personal';
+export type ProjectCategory = 'physical-products' | 'digital-products' | 'marketing' | 'operations';
 
 export interface Task {
   id: string;
@@ -20,6 +21,20 @@ export interface Task {
   notes?: string;
 }
 
+export interface ProjectPhase {
+  id: string;
+  name: string;
+  description: string;
+  status: ProjectStatus;
+  items: string[];
+}
+
+export interface ProjectLink {
+  label: string;
+  href: string;
+  type: 'repo' | 'deploy' | 'doc' | 'figma' | 'spec' | 'external';
+}
+
 export interface Project {
   id: string;
   name: string;
@@ -27,12 +42,20 @@ export interface Project {
   nextAction: string;
   dueDate?: string;
   description?: string;
+  longDescription?: string;
   color: string;
   emoji: string;
   tasks: Task[];
   notes: string;
   updatedAt: string;
   context?: AppContext;
+  category?: ProjectCategory;
+  owner?: TeamMember;
+  developer?: TeamMember;
+  phases?: ProjectPhase[];
+  links?: ProjectLink[];
+  stack?: string[];
+  keyMetrics?: { label: string; value: string }[];
 }
 
 export interface Idea {

@@ -119,6 +119,21 @@ export const IP_ITEMS: IPItem[] = [
     relatedProject: { name: 'FORGE Training System', href: '/projects' },
   },
 
+  {
+    id: 'ryp-red-ssl-esl',
+    name: 'RYP RED — SSL/ESL Golf Analytics',
+    category: 'patent',
+    status: 'draft-complete',
+    priority: 'high',
+    description: '32-claim provisional patent — prospective aim capture, SSL/ESL decomposition, 2-factor dispersion model, AI card scan extraction, temporal integrity. 6 new claims (13A-13F) added April 2026: miss-from-target metric, aim vector pipeline, wind extraction, multi-image stitching, diagnostic reports, confidence-weighted extraction.',
+    attorney: 'Sam (Upwork)',
+    docUrl: MASTER_DOC,
+    dateModified: 'Apr 4, 2026',
+    formalTitle: 'System and Method for Prospective Aim Capture and Strategy-Execution Decomposition in Golf Analytics',
+    notes: 'Updated DOCX in RYP-Projects: RYP_RED_Patent_Updated_April2026.docx. Source files in Downloads: patent app (.md), developer handoff, prior art search, simulator v2 (.jsx), dashboard prototype (.html). Crown jewel: Claim 13A miss-from-target metric. 18Birdies-proof via Claim 4 temporal integrity.',
+    relatedProject: { name: 'RYP Red', href: '/projects' },
+  },
+
   // ── TRADEMARKS ────────────────────────────────────────────────────────────
   {
     id: 'tm-ryp-golf',

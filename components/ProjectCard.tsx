@@ -8,6 +8,7 @@ const STATUS_CONFIG: Record<ProjectStatus, { label: string; class: string }> = {
   'blocked':         { label: 'Blocked',           class: 'bg-red-500/15 text-red-400 border-red-500/30' },
   'paused':          { label: 'Paused',            class: 'bg-white/8 text-white/50 border-white/15' },
   'complete':        { label: 'Complete',          class: 'bg-[#00af51]/15 text-[#00af51] border-[#00af51]/30' },
+  'pending':         { label: 'Pending',           class: 'bg-white/5 text-white/40 border-white/10' },
 };
 
 interface Props {

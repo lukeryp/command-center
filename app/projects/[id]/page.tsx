@@ -19,6 +19,7 @@ const STATUS_COLOR: Record<ProjectStatus, string> = {
   'blocked':         '#ef4444',
   'paused':          '#6b7280',
   'complete':        '#00af51',
+  'pending':         '#4b5563',
 };
 
 export default function ProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
