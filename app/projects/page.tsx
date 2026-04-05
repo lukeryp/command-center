@@ -19,6 +19,7 @@ const CATEGORIES: { key: ProjectCategory; label: string; icon: string }[] = [
   { key: 'physical-products', label: 'Physical Products',  icon: '🏭' },
   { key: 'marketing',         label: 'Marketing',          icon: '📣' },
   { key: 'operations',        label: 'Operations',         icon: '⚙️' },
+  { key: 'infrastructure',    label: 'Infrastructure',     icon: '🔧' },
 ];
 
 function PhaseBar({ phases }: { phases: Project['phases'] }) {
@@ -105,6 +106,16 @@ function ProjectRow({ project, tasks, defaultExpanded }: { project: Project; tas
             {/* Description */}
             {project.longDescription && (
               <p className="text-white/50 text-sm leading-relaxed">{project.longDescription}</p>
+            )}
+
+            {/* Local Path */}
+            {project.localPath && (
+              <div className="flex items-center gap-2">
+                <span className="text-white/25 text-[10px] uppercase tracking-wider shrink-0">Local</span>
+                <code className="text-[11px] text-[#00af51]/70 bg-[#00af51]/5 border border-[#00af51]/10 rounded-md px-2.5 py-1 font-mono truncate">
+                  {project.localPath}
+                </code>
+              </div>
             )}
 
             {/* Key Metrics */}
