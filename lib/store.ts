@@ -4,7 +4,7 @@ import { SEED_TASKS } from './tasks-data';
 import { SEED_IDEAS } from './ideas-data';
 
 const KEY = 'ryp_cc_state';
-const SEED_VERSION = 8; // bump to re-seed projects + tasks + ideas
+const SEED_VERSION = 9; // bump to re-seed projects + tasks + ideas
 
 const DEFAULT_PROJECTS: Project[] = [
   // ── DIGITAL PRODUCTS ─────────────────────────────────────────────────
@@ -30,7 +30,6 @@ const DEFAULT_PROJECTS: Project[] = [
     links: [
       { label: 'Live App', href: 'https://known.golf', type: 'deploy' },
       { label: 'GitHub', href: 'https://github.com/lukeryp/interlachen-quiz', type: 'repo' },
-      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/known-website', type: 'repo' },
     ],
     phases: [
       { id: 'k-p1', name: 'Core App', description: 'Auth, quiz, member data, dashboard', status: 'complete', items: ['Authentication flow', 'Quiz engine', 'Member database', 'Player dashboard'] },
@@ -65,7 +64,6 @@ const DEFAULT_PROJECTS: Project[] = [
     links: [
       { label: 'Live App', href: 'https://ryp-red.vercel.app', type: 'deploy' },
       { label: 'GitHub', href: 'https://github.com/lukeryp/ryp-red', type: 'repo' },
-      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/ryp-red', type: 'repo' },
       { label: 'Build Plan', href: '/projects/ryp-red', type: 'spec' },
       { label: 'Patent (32 claims)', href: '#', type: 'doc' },
     ],
@@ -103,7 +101,6 @@ const DEFAULT_PROJECTS: Project[] = [
     developer: 'Max',
     stack: ['Next.js', 'Supabase', 'TypeScript', 'Tailwind'],
     links: [
-      { label: 'Live App', href: 'https://cert.rypgolf.com', type: 'deploy' },
       { label: 'GitHub', href: 'https://github.com/lukeryp/ryp-certification', type: 'repo' },
     ],
     phases: [
@@ -138,7 +135,7 @@ const DEFAULT_PROJECTS: Project[] = [
     stack: ['Next.js 14', 'TypeScript', 'Tailwind', 'PWA', 'localStorage'],
     links: [
       { label: 'Live App', href: 'https://command-center-nine-kappa.vercel.app', type: 'deploy' },
-      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/command-center', type: 'repo' },
+      { label: 'GitHub', href: 'https://github.com/lukeryp/command-center', type: 'repo' },
     ],
     phases: [
       { id: 'cc-p1', name: 'Core Modules', description: 'Projects, tasks, team, ideas, session logs', status: 'complete', items: ['Project tracker', 'Task management', 'Team page', 'Ideas capture', 'Session logs'] },
@@ -416,7 +413,6 @@ const DEFAULT_PROJECTS: Project[] = [
     stack: ['Next.js', 'TypeScript', 'Tailwind'],
     links: [
       { label: 'GitHub', href: 'https://github.com/lukeryp/ryp-hub', type: 'repo' },
-      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/ryp-hub', type: 'repo' },
     ],
     keyMetrics: [
       { label: 'Status', value: 'Built — not deployed' },
@@ -442,7 +438,7 @@ const DEFAULT_PROJECTS: Project[] = [
     developer: 'Claude',
     stack: ['React', 'TypeScript', 'Tailwind'],
     links: [
-      { label: 'Local: ~/RYP-Projects/ryp-ui/', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/ryp-ui', type: 'repo' },
+      { label: 'GitHub', href: 'https://github.com/lukeryp/ryp-ui', type: 'repo' },
     ],
     keyMetrics: [
       { label: 'Status', value: 'Complete' },
@@ -496,7 +492,7 @@ const DEFAULT_PROJECTS: Project[] = [
     stack: ['Next.js', 'TypeScript', 'Tailwind', 'Vercel'],
     links: [
       { label: 'Live App', href: 'https://practice-dna.vercel.app', type: 'deploy' },
-      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/practice-dna', type: 'repo' },
+      { label: 'GitHub', href: 'https://github.com/lukeryp/practice-dna', type: 'repo' },
     ],
     keyMetrics: [
       { label: 'Status', value: 'Live' },
@@ -523,7 +519,6 @@ const DEFAULT_PROJECTS: Project[] = [
     stack: ['Next.js', 'Supabase', 'TypeScript', 'Tailwind'],
     links: [
       { label: 'GitHub', href: 'https://github.com/lukeryp/kudo', type: 'repo' },
-      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/kudo', type: 'repo' },
     ],
     phases: [
       { id: 'kudo-p1', name: 'Scaffold', description: 'App structure and UI', status: 'complete', items: ['Next.js scaffold', 'UI components', 'Testimonial form', 'Card generator'] },
@@ -551,11 +546,10 @@ const DEFAULT_PROJECTS: Project[] = [
     category: 'digital-products',
     owner: 'Luke',
     developer: 'Claude',
-    localPath: '~/Desktop/RYP-Projects/monorepo/apps/forge-app',
+    localPath: '~/Desktop/RYP-Projects/ryp-red',
     stack: ['Node.js', 'HTML/CSS', 'Supabase'],
     links: [
-      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/monorepo/apps/forge-app', type: 'repo' },
-      { label: 'FORGE Physical', href: '/projects/forge', type: 'spec' },
+      { label: 'GitHub', href: 'https://github.com/lukeryp/ryp-red', type: 'repo' },
     ],
     phases: [
       { id: 'fa-p1', name: 'Scaffold', description: 'App shell + drill scoring UI', status: 'complete', items: ['App scaffold', 'Drill scoring screens', 'Session log UI', 'Progress dashboard'] },
@@ -587,9 +581,7 @@ const DEFAULT_PROJECTS: Project[] = [
     localPath: '~/Desktop/RYP-Projects/chip',
     stack: ['Next.js', 'Supabase', 'TypeScript', 'Tailwind', 'Vercel'],
     links: [
-      { label: 'Live App', href: 'https://chip.rypgolf.com', type: 'deploy' },
       { label: 'GitHub', href: 'https://github.com/lukeryp/chip', type: 'repo' },
-      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/chip', type: 'repo' },
     ],
     phases: [
       { id: 'cf-p1', name: 'Core App', description: 'Auth, workout tracking, progress dashboard', status: 'complete', items: ['Auth flow (Supabase)', 'Workout logging', 'Mobility scoring', 'Progress dashboard'] },
@@ -622,9 +614,7 @@ const DEFAULT_PROJECTS: Project[] = [
     localPath: '~/Desktop/RYP-Projects/player-dashboard',
     stack: ['Next.js', 'Supabase', 'TypeScript', 'Tailwind', 'Vercel'],
     links: [
-      { label: 'Live App', href: 'https://ryp-player-dashboard.vercel.app', type: 'deploy' },
       { label: 'GitHub', href: 'https://github.com/lukeryp/ryp-player-dashboard', type: 'repo' },
-      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/player-dashboard', type: 'repo' },
     ],
     phases: [
       { id: 'pd2-p1', name: 'Core View', description: 'Unified stats from all RYP products', status: 'on-track', items: ['RYP Red data integration', 'Course IQ + Strike Score display', 'Practice trend charts', 'Session history'] },
@@ -659,7 +649,7 @@ const DEFAULT_PROJECTS: Project[] = [
     links: [
       { label: 'Manager Dashboard', href: 'https://icc-junior-league-apply.vercel.app/manager', type: 'deploy' },
       { label: 'Apply Form', href: 'https://icc-junior-league-apply.vercel.app', type: 'external' },
-      { label: 'Local Repo', href: 'vscode://file/Users/lukebenoit/Desktop/RYP-Projects/icc-junior-league-apply', type: 'repo' },
+      { label: 'GitHub', href: 'https://github.com/lukeryp/icc-junior-league-apply', type: 'repo' },
     ],
     keyMetrics: [
       { label: 'PIN', value: '1909' },
