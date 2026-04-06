@@ -101,8 +101,7 @@ const RYP_APPS: RYPApp[] = [
     name: 'Player Dashboard',
     description: 'Unified Performance View',
     emoji: '📊',
-    status: 'live',
-    liveUrl: 'https://ryp-player-dashboard.vercel.app',
+    status: 'built',
     githubUrl: 'https://github.com/lukeryp/ryp-player-dashboard',
     accent: '#818cf8',
   },
@@ -120,7 +119,6 @@ const RYP_APPS: RYPApp[] = [
     emoji: '💪',
     status: 'built',
     githubUrl: 'https://github.com/lukeryp/chip',
-    liveUrl: 'https://chip.rypgolf.com',
     accent: '#0ea5e9',
   },
   {
@@ -128,7 +126,7 @@ const RYP_APPS: RYPApp[] = [
     description: 'Instructor Certification',
     emoji: '🏅',
     status: 'planned',
-    liveUrl: 'https://cert.rypgolf.com',
+    githubUrl: 'https://github.com/lukeryp/ryp-certification',
     accent: '#f97316',
   },
   {
