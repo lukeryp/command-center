@@ -517,8 +517,10 @@ const DEFAULT_PROJECTS: Project[] = [
     developer: 'Claude',
     localPath: '~/Desktop/RYP-Projects/kudo',
     stack: ['Next.js', 'Supabase', 'TypeScript', 'Tailwind'],
+    liveUrl: 'https://kudo-gamma.vercel.app',
     links: [
       { label: 'GitHub', href: 'https://github.com/lukeryp/kudo', type: 'repo' },
+      { label: 'Live App', href: 'https://kudo-gamma.vercel.app', type: 'live' },
     ],
     phases: [
       { id: 'kudo-p1', name: 'Scaffold', description: 'App structure and UI', status: 'complete', items: ['Next.js scaffold', 'UI components', 'Testimonial form', 'Card generator'] },
@@ -581,7 +583,6 @@ const DEFAULT_PROJECTS: Project[] = [
     localPath: '~/Desktop/RYP-Projects/chip',
     stack: ['Next.js', 'Supabase', 'TypeScript', 'Tailwind', 'Vercel'],
     links: [
-      { label: 'Live App', href: 'https://chip.rypgolf.com', type: 'deploy' },
       { label: 'GitHub', href: 'https://github.com/lukeryp/chip', type: 'repo' },
     ],
     phases: [
@@ -615,7 +616,6 @@ const DEFAULT_PROJECTS: Project[] = [
     localPath: '~/Desktop/RYP-Projects/player-dashboard',
     stack: ['Next.js', 'Supabase', 'TypeScript', 'Tailwind', 'Vercel'],
     links: [
-      { label: 'Live App', href: 'https://ryp-player-dashboard.vercel.app', type: 'deploy' },
       { label: 'GitHub', href: 'https://github.com/lukeryp/ryp-player-dashboard', type: 'repo' },
     ],
     phases: [
