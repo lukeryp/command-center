@@ -4,7 +4,7 @@ import { SEED_TASKS } from './tasks-data';
 import { SEED_IDEAS } from './ideas-data';
 
 const KEY = 'ryp_cc_state';
-const SEED_VERSION = 9; // bump to re-seed projects + tasks + ideas
+const SEED_VERSION = 10; // bump to re-seed projects + tasks + ideas
 
 const DEFAULT_PROJECTS: Project[] = [
   // ── DIGITAL PRODUCTS ─────────────────────────────────────────────────
@@ -581,6 +581,7 @@ const DEFAULT_PROJECTS: Project[] = [
     localPath: '~/Desktop/RYP-Projects/chip',
     stack: ['Next.js', 'Supabase', 'TypeScript', 'Tailwind', 'Vercel'],
     links: [
+      { label: 'Live App', href: 'https://chip.rypgolf.com', type: 'deploy' },
       { label: 'GitHub', href: 'https://github.com/lukeryp/chip', type: 'repo' },
     ],
     phases: [
@@ -614,6 +615,7 @@ const DEFAULT_PROJECTS: Project[] = [
     localPath: '~/Desktop/RYP-Projects/player-dashboard',
     stack: ['Next.js', 'Supabase', 'TypeScript', 'Tailwind', 'Vercel'],
     links: [
+      { label: 'Live App', href: 'https://ryp-player-dashboard.vercel.app', type: 'deploy' },
       { label: 'GitHub', href: 'https://github.com/lukeryp/ryp-player-dashboard', type: 'repo' },
     ],
     phases: [
